@@ -1,17 +1,26 @@
 <template>
   <div id="$style.app">
-    <h2>{{ text }}</h2>
-    <ContainerMain>
-      <ApartmentFilterForm @submit="filter" class="apartments-filter" />
-    </ContainerMain>
-
-    <p v-if="!filteredApartments.length"> Нічого не знайдено ! </p>
-
-    <ApartmentsList v-else :items="filteredApartments">
-      <template #apartment="{ id, descr, rating, imgUrl, price }">
-        <ApartmentsItem :key="id" :descr="descr" :rating="rating" :imgSrc="imgUrl" :price="price" />
+    <div class="content">
+      <AppHeader />
+      <template>
+        <h2>{{ text }}</h2>
       </template>
-    </ApartmentsList>
+
+      <ContainerMain>
+        <ApartmentFilterForm @submit="filter" class="apartments-filter" />
+      </ContainerMain>
+
+      <ContainerMain>
+        <p v-if="!filteredApartments.length"> Нічого не знайдено ! </p>
+
+        <ApartmentsList v-else :items="filteredApartments">
+          <template #apartment="{ id, descr, rating, imgUrl, price }">
+            <ApartmentsItem :key="id" :descr="descr" :rating="rating" :imgSrc="imgUrl" :price="price" />
+          </template>
+        </ApartmentsList>
+      </ContainerMain>
+    </div>
+    <AppFooter />
   </div>
 </template> 
 
@@ -22,6 +31,8 @@ import ApartmentsList from './components/apartment/ApartmentsList.vue';
 import ApartmentsItem from './components/apartment/ApartmentsItem.vue';
 import ContainerMain from './components/shared/ContainerMain.vue';
 import apartments from './components/apartment/apartmentJs.js';
+import AppHeader from './components/AppHeader.vue';
+import AppFooter from './components/AppFooter.vue';
 
 export default {
   name: "App",
@@ -30,6 +41,8 @@ export default {
     ApartmentFilterForm,
     ApartmentsList,
     ApartmentsItem,
+    AppHeader,
+    AppFooter
   },
   data()
   {
@@ -89,20 +102,18 @@ export default {
 
 <style lang="scss" scoped>
 #app {
-  /* display: flex;
+  display: flex;
   flex-direction: column;
-  min-height: 100vh; */
+  min-height: 100vh;
   font-family: Montserrat, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 
-/* .content {
+.content {
   flex-grow: 1;
-} */
+  padding-top: 120px;
+}
 
 .apartments-filter {
   /* display: flex;

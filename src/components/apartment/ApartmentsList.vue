@@ -1,6 +1,6 @@
 <template>
     <ContainerMain>
-        <slot name="title"></slot>
+        <slot name="title">Добірка згідно вибору</slot>
         <div class="apartments-list">
             <!-- <ApartmentsItem v-for="{ id, descr, rating, imgUrl, price } in items" :key="id" :descr="descr" :rating="rating"
                 :imgSrc="imgUrl" :price="price" class="apartments-list__item" /> -->
