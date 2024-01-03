@@ -23,14 +23,13 @@ export default {
     {
         return {
             city: '',
-            price: '',
+            price: null,
         }
     },
     computed: {
         cities()
         {
             return [
-                { value: '', label: 'Місто', selected: true },
                 'Kyiv',
                 'Odesa',
                 'Poltava',

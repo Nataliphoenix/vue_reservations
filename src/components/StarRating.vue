@@ -1,19 +1,14 @@
 <template>
   <div class="star-rating">
-    <span
-      v-for="index in starLimit"
-      :key="index"
-      class="star star--outlined"></span>
+    <span v-for="index in starLimit" :key="index" class="star star--outlined"></span>
     <div class="star-rating__colored" :style="ratingWidthStyle">
-      <span
-        v-for="index in starLimit"
-        :key="index"
-        class="star star--colored"></span>
+      <span v-for="index in starLimit" :key="index" class="star star--colored"></span>
     </div>
   </div>
 </template>
 
 <script>
+
 export default {
   name: "StarRating",
   props: {
@@ -27,10 +22,12 @@ export default {
     },
   },
   computed: {
-    ratingWidth() {
+    ratingWidth()
+    {
       return (this.rating / this.starLimit) * 100;
     },
-    ratingWidthStyle() {
+    ratingWidthStyle()
+    {
       return `width: ${this.ratingWidth}%;`;
     },
   },
@@ -41,6 +38,7 @@ export default {
 .star-rating {
   position: relative;
   display: inline-flex;
+
   &__colored {
     display: inline-flex;
     position: absolute;
@@ -50,17 +48,20 @@ export default {
     left: 0;
     overflow: hidden;
   }
+
   .star {
     display: inline-block;
     width: 16px;
     height: 16px;
     margin: 0 3px;
     flex-shrink: 0;
+
     &--colored {
-      background: url("../../public/img/star-yellow.svg") center no-repeat;
+      background: url("../img/star-yellow.svg") center no-repeat;
     }
+
     &--outlined {
-      background: url("../../public/img/star-outlined.svg") center no-repeat;
+      background: url("../img/star-outlined.svg") center no-repeat;
     }
   }
 }

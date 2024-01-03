@@ -1,9 +1,8 @@
 <template>
     <div class="wrapper-input">
-        <input type="number" min="0" :value="modelValue" @input="$emit('update:modelValue', $event.target.value)"
-            class="custom-input" placeholder="Вартість, від" />
-
-        <!-- <input v-on="listeners" class="custom-input"> -->
+        <!-- <input type="number" min="0" :value="modelValue" @input="$emit('update:modelValue', $event.target.value)"
+            class="custom-input" placeholder="Вартість, від" /> -->
+        <input v-model="price" @input="handleChange" class="custom-input" placeholder="Вартість, від" />
     </div>
 </template>
 
@@ -11,18 +10,33 @@
 <script>
 export default {
     name: 'CustomInput',
-    props: ['modelValue'],
+    // props: ['modelValue'],
+    // emits: ['update:modelValue'],
+    props: {
+        modelValue: {
+            type: String,
+            required: true
+        },
+    },
     emits: ['update:modelValue'],
-
-    // computed: {
-    //     listeners()
-    //     {
-    //         return {
-    //             ...this.$attrs,
-    //             input: event => this.$emit('input', event.target.value)
-    //         }
-    //     }
-    // }
+    computed: {
+        price: {
+            get()
+            {
+                return this.modelValue;
+            },
+            set(value)
+            {
+                this.$emit('update:modelValue', value)
+            },
+        }
+    },
+    methods: {
+        handleChange()
+        {
+            this.city = event.target.value;
+        },
+    },
 }
 </script>
 

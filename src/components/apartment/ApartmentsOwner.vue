@@ -23,6 +23,7 @@ export default {
 @import './src/assets/scss/variables.scss';
 
 .apartments-owner {
+   margin-bottom: 20px;
    padding: 19px 20px 30px 20px;
    background-color: $card-bg;
 
