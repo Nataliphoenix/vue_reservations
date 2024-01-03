@@ -1,6 +1,5 @@
 <template>
    <main class="homepage">
-
       <ContainerMain>
          <ApartmentFilterForm @submit="filter" class="apartments-filter" />
       </ContainerMain>
@@ -23,7 +22,7 @@ import ApartmentFilterForm from '../components/apartment/ApartmentFilterForm.vue
 import ApartmentsList from '../components/apartment/ApartmentsList.vue';
 import ApartmentsItem from '../components/apartment/ApartmentsItem.vue';
 import ContainerMain from '../components/shared/ContainerMain.vue';
-import apartments from '../components/apartment/apartmentJs.js';
+import apartments from '../components/apartment/apartments'
 
 export default {
    name: "App",
@@ -36,7 +35,6 @@ export default {
    data()
    {
       return {
-         text: '',
          apartments,
          filters: {
             city: '',
@@ -47,43 +45,50 @@ export default {
    computed: {
       filteredApartments()
       {
-         console.log(apartments, 'filteredApartments')
+
+         console.log(this.apartments, '-----this.apartments')
+
          return this.filterByCityName(this.filterByPrice(this.apartments))
       }
    },
    methods: {
-      // logger({ city, price })
+      // logger(value)
       // {
-      //   console.log(city, price, 'form value')
-      // }
-      // ,
+      //    console.log(value, '---form value')
+      // },
       filter({ city, price })
       {
-         this.filters.city = city;
-         this.filters.price = price;
+         this.filters.city = city
+         this.filters.price = price
 
-         console.log(city, price, 'form value')
-         console.log(this.filters.city, this.filters.price, 'filter')
+         console.log(city, price, 'filter__form value')
+         console.log(this.filters.city, this.filters.price, 'filter__filter')
       },
-
       filterByCityName(apartments)
       {
-         if (!this.filters.city) return apartments
+         // console.log(this.filters.city, '----filterByCityName')
+         if (!this.filters.city)
+         {
+            console.log(this.filters.city, '----filterByCityName')
+            return apartments
+         }
 
          return apartments.filter(apartment =>
          {
-            return apartment.location.city === this.filters.city
+            console.log(this.filters.city, '+++++filterByCityName')
+            return apartment.location.city.toLowerCase() === this.filters.city.toLowerCase()
          })
       },
-
       filterByPrice(apartments)
       {
+         console.log(this.filters.price, '-----filterByPrice')
+
          if (!this.filters.price) return apartments
+
          return apartments.filter(apartment =>
          {
             return apartment.price >= this.filters.price
          })
-
       },
    }
 };

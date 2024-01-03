@@ -1,8 +1,7 @@
 <template>
-    <select v-model="selected" class="custom-select">
-        <!-- <select v-on="listeners" class="custom-select"> -->
-        <option v-for="item in formatedItems" :key="item.value" :value="item.value" :selected="item.selected">{{
-            item.label }}
+    <select v-model="city" @change="handleChange" class="custom-select">
+        <option disabled value="">Місто</option>
+        <option v-for="item in formattedItems" :key="item.value" :value="item.value">{{ item.label }}
         </option>
     </select>
 </template>
@@ -14,25 +13,40 @@ export default {
         items: {
             type: Array,
             required: true,
-        }
+        },
+        modelValue: {
+            type: String,
+            required: true
+        },
     },
-    // emits: ["update:selected"],
+    emits: ['update:modelValue'],
     computed: {
-        // listeners()
-        // {
-        //     return {
-        //         ...this.$attrs,
-        //         input: event => this.$emit('input', event.target.value)
-        //     }
-        // },
-        formatedItems()
+        formattedItems()
         {
             return this.items.map(item =>
             {
-                return typeof item === 'object' ? item : { value: item, label: item }
+                return typeof item === 'object'
+                    ? item
+                    : { value: item, label: item }
             })
+        },
+        city: {
+            get()
+            {
+                return this.modelValue;
+            },
+            set(value)
+            {
+                this.$emit('update:modelValue', value)
+            },
         }
-    }
+    },
+    methods: {
+        handleChange()
+        {
+            this.city = event.target.value;
+        },
+    },
 }
 </script>
 
